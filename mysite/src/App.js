@@ -76,7 +76,7 @@ const App = () => {
     {
       title: 'Farm-Client App',
       description: 'Redefines how food is being distributed after being produced by the local farmer',
-      image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=250&fit=crop',
+      image: '',
       tech: ['FastAPI', 'Postgres'],
       github: 'https://github.com/devharnold/farm-client',
       //live: 'https://your-taskmanager-demo.com',
