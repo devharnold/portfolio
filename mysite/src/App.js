@@ -60,8 +60,8 @@ const App = () => {
     { name: 'Python', level: 90, icon: Code },
     { name: 'Java', level: 40, icon: Code},
     { name: 'FastAPI', level: 85, icon: Code },
-    { name: 'Flask', level: 80, icon: Database },
-    { name: 'Postgres', level: 88, icon: Palette },
+    { name: 'Flask', level: 80, icon: Code },
+    { name: 'Postgres', level: 88, icon: Database },
   ];
 
   const projects = [
