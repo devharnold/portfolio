@@ -7,7 +7,7 @@ const App = () => {
   const [typedText, setTypedText] = useState('');
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   
-  const words = ['Backend Developer', 'API Nerd', 'Problem Solver', 'Code Enthusiast'];
+  const words = React.useMemo(() => ['Backend Developer', 'API Nerd', 'Problem Solver', 'Code Enthusiast'], []);
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -54,7 +54,7 @@ const App = () => {
     }, 100);
 
     return () => clearInterval(typeInterval);
-  }, [words]);
+  }, [words, currentWordIndex]);
 
   const skills = [
     { name: 'Python', level: 90, icon: Code },
