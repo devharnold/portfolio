@@ -7,7 +7,7 @@ const App = () => {
   const [typedText, setTypedText] = useState('');
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   
-  const words = React.useMemo(() => ['A Backend Developer', 'An API Nerd', 'Problem Solver'], []);
+  const words = React.useMemo(() => ['A Backend Developer', 'An API Nerd', 'A Problem Solver'], []);
   
   useEffect(() => {
     const observer = new IntersectionObserver(
