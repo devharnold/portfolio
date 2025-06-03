@@ -54,7 +54,7 @@ const App = () => {
     }, 100);
 
     return () => clearInterval(typeInterval);
-  }, [currentWordIndex]);
+  }, [words]);
 
   const skills = [
     { name: 'Python', level: 90, icon: Code },
