@@ -7,7 +7,7 @@ const App = () => {
   const [typedText, setTypedText] = useState('');
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   
-  const words = React.useMemo(() => ['Backend Developer', 'API Nerd', 'Problem Solver', 'Code Enthusiast'], []);
+  const words = React.useMemo(() => ['A Backend Developer', 'An API Nerd', 'Problem Solver'], []);
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -123,7 +123,7 @@ const App = () => {
               Welcome Aboard!
             </h1>
             <div className="text-2xl md:text-3xl text-gray-300 h-12 flex items-center justify-center">
-              <span className="mr-2">I'm a</span>
+              <span className="mr-2">I'm </span>
               <span className="text-purple-400 font-semibold min-w-[300px] text-left">
                 {typedText}
                 <span className="animate-pulse">|</span>
