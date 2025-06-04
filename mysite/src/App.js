@@ -126,7 +126,7 @@ const App = () => {
               <span className="mr-2">I'm </span>
               <span className="text-purple-400 font-semibold min-w-[300px] text-left">
                 {typedText}
-                <span className="animate-pulse">|</span>
+                <span className="animate-pulse">$</span>
               </span>
             </div>
           </div>
@@ -177,7 +177,7 @@ const App = () => {
                   <div className="text-gray-400">Projects</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-400">1+</div>
+                  <div className="text-3xl font-bold text-purple-400">2+</div>
                   <div className="text-gray-400">Years</div>
                 </div>
                 <div className="text-center">
