@@ -126,7 +126,7 @@ const App = () => {
               <span className="mr-2">I'm </span>
               <span className="text-purple-400 font-semibold min-w-[300px] text-left">
                 {typedText}
-                <span className="animate-pulse">$</span>
+                <span className="animate-pulse">|</span>
               </span>
             </div>
           </div>
