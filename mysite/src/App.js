@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ExternalLink, Code, Database, ChevronDown } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, Code, Database, ChevronDown, Twitter, Plug } from 'lucide-react';
 
 const App = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -57,11 +57,13 @@ const App = () => {
   }, [words, currentWordIndex]);
 
   const skills = [
-    { name: 'Python', level: 90, icon: Code },
-    { name: 'Java', level: 40, icon: Code},
-    { name: 'FastAPI', level: 85, icon: Code },
-    { name: 'Flask', level: 80, icon: Code },
-    { name: 'Postgres', level: 88, icon: Database },
+    { name: 'Python', icon: Code },
+    { name: 'Java', icon: Code},
+    { name: 'FastAPI', icon: Code },
+    { name: 'Flask', icon: Code },
+    { name: 'Postgres', icon: Database },
+    { name: 'REST', icon: Plug },
+    { name: 'gRPC', icon: Plug }
   ];
 
   const projects = [
@@ -131,7 +133,7 @@ const App = () => {
             </div>
           </div>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Passionate about creating exceptional digital experiences through code.  
+            Passionate about creating seamless digital experiences through code.  
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
@@ -162,35 +164,16 @@ const App = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <p className="text-lg text-gray-300 leading-relaxed">
-                I'm a passionate backend developer with over 1 years of experience creating digital solutions 
-                that make a difference. My journey started with curiosity about how websites work, and it has 
-                evolved into a deep love for crafting exceptional user experiences.
+                As a Backend Software Engineer, I have been passionate and drawn to creating new solutions and on a mission to write clean, secure APIs.
+                With knowledge in <b>Backend Development</b> I am open to working towards solving problems through innovative solutions.
+                I am currently building solutions with keen interest on micro-services, security and performance optimization.
               </p>
-              <p className="text-lg text-gray-300 leading-relaxed">
-                Besides work, you'll find me exploring new technologies, or sharing knowledge with the developer community. 
-                I believe in continuous learning 
-                and staying ahead in this ever-evolving field.
-              </p>
-              <div className="flex space-x-4">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-400">3+</div>
-                  <div className="text-gray-400">Projects</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-400">2+</div>
-                  <div className="text-gray-400">Years</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-400">100+</div>
-                  <div className="text-gray-400">Commits</div>
-                </div>
-              </div>
             </div>
             <div className="relative">
               <div className="w-80 h-80 mx-auto rounded-full bg-gradient-to-r from-purple-600 to-pink-600 p-1">
                 <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center overflow-hidden">
                   <img
-                    src="/path-to-your-photo.jpg"
+                    src=""
                     alt="My Profile"
                     className="w-full h-full object-cover rounded-full"
                   />
@@ -216,13 +199,6 @@ const App = () => {
                     <Icon className="text-purple-400 mr-3" size={24} />
                     <h3 className="text-xl font-semibold">{skill.name}</h3>
                   </div>
-                  <div className="w-full bg-gray-700 rounded-full h-3 mb-2">
-                    <div 
-                      className="bg-gradient-to-r from-purple-500 to-pink-500 h-3 rounded-full transition-all duration-1000 ease-out"
-                      style={{ width: isVisible.skills ? `${skill.level}%` : '0%' }}
-                    ></div>
-                  </div>
-                  <div className="text-gray-400 text-sm">{skill.level}%</div>
                 </div>
               );
             })}
@@ -234,7 +210,7 @@ const App = () => {
       <section id="projects" className={`py-20 transition-all duration-1000 ${isVisible.projects ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            Featured Projects
+            Projects
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
@@ -299,6 +275,9 @@ const App = () => {
               </a>
               <a href="https://linkedin.com/in/arnold-henry-ah01/" className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110">
                 <Linkedin size={24} />
+              </a>
+              <a href="https://x.com/greycapone" className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110">
+                <Twitter size={24} />
               </a>
             </div>
           </div>
