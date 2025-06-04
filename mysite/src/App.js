@@ -131,7 +131,7 @@ const App = () => {
             </div>
           </div>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Passionate about creating exceptional digital experiences through clean code and innovative solutions. 
+            Passionate about creating exceptional digital experiences through code.  
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
