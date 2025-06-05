@@ -61,6 +61,7 @@ const App = () => {
     { name: 'Java', icon: Code},
     { name: 'FastAPI', icon: Code },
     { name: 'Flask', icon: Code },
+    { name: 'Spring Boot', icon: Code},
     { name: 'Postgres', icon: Database },
     { name: 'REST', icon: Plug },
     { name: 'gRPC', icon: Plug }
