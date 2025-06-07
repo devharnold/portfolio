@@ -57,6 +57,7 @@ const App = () => {
   }, [words, currentWordIndex]);
 
   const skills = [
+    { name: 'Data Structures & Algorithms', icon: Code },
     { name: 'Python', icon: Code },
     { name: 'Java', icon: Code},
     { name: 'FastAPI', icon: Code },
@@ -72,7 +73,7 @@ const App = () => {
       title: 'Mobile Wallet Backend Service',
       description: 'A backend service for a mobile wallet',
       image: '',
-      tech: ['Flask', 'Kafka', 'Postgres', 'Stripe', 'Daraja API', 'Micro-services'],
+      tech: ['Flask', 'Kafka', 'Postgres', 'Stripe API', 'Daraja API', 'Micro-services'],
       github: 'https://github.com/devharnold/earwall',
       //live: 'https://your-ecommerce-demo.com',
     },
