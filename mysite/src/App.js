@@ -175,7 +175,7 @@ const App = () => {
               <div className="w-80 h-80 mx-auto rounded-full bg-gradient-to-r from-purple-600 to-pink-600 p-1">
                 <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center overflow-hidden">
                   <img
-                    src=""
+                    src="mysite.pics.arnold.JPG"
                     alt="My Profile"
                     className="w-full h-full object-cover rounded-full"
                   />
