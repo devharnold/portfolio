@@ -85,6 +85,14 @@ const App = () => {
       github: 'https://github.com/devharnold/farm-client',
       //live: 'https://your-taskmanager-demo.com',
     },
+    {
+      title: 'Event Management Application',
+      description: 'About managing events, provides ticketing services and also payments',
+      image: '',
+      tech: ['Spring Boot', 'Postgres', 'gRPC'],
+      github: 'https://github.com/devharnold/event-hub',
+      //live: 'https://your-taskmanager-demo.com',
+    },
   ];
 
   const scrollToSection = (sectionId) => {
