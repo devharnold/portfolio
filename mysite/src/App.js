@@ -286,7 +286,7 @@ const App = () => {
               <a href="https://linkedin.com/in/arnold-henry-ah01/" className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110">
                 <Linkedin size={24} />
               </a>
-              <a href="https://x.com/greycapone" className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110">
+              <a href="https://x.com/yourapinerd" className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110">
                 <Twitter size={24} />
               </a>
             </div>
