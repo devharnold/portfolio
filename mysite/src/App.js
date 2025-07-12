@@ -266,7 +266,7 @@ const App = () => {
       <section id="contact" className={`py-20 transition-all duration-1000 ${isVisible.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            Invite me to work with you
+            Find me Here:
           </h2>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
             Have a project going on? Let's create something amazing together.
@@ -288,6 +288,9 @@ const App = () => {
               </a>
               <a href="https://x.com/yourapinerd" className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110">
                 <Twitter size={24} />
+              </a>
+              <a href="https://leetcode.com/u/devharnold/" className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110">
+                <Code size={24} />
               </a>
             </div>
           </div>
