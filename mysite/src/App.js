@@ -89,10 +89,17 @@ const App = () => {
       title: 'Event Management Application',
       description: 'About managing events, provides ticketing services and also payments',
       image: '',
-      tech: ['Spring Boot', 'Postgres', 'gRPC'],
-      github: 'https://github.com/devharnold/event-hub',
+      tech: ['Spring Boot', 'Postgres'],
+      github: 'https://github.com/devharnold/Eventshub',
       //live: 'https://your-taskmanager-demo.com',
     },
+    {
+      title: 'Leetcode Playground',
+      description: 'My DSA practising playground. I fight DSA wars here',
+      tech: ['Python', 'Java', 'SQL'],
+      github: 'https://github.com/devharnold/dsa-repo',
+      live: 'https://leetcode.com/u/devharnold/'
+    }
   ];
 
   const scrollToSection = (sectionId) => {
