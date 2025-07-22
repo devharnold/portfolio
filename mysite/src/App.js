@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ExternalLink, Code, Database, ChevronDown, Twitter, Plug } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, Code, Database, ChevronDown, Twitter, Plug, Cloud, Server } from 'lucide-react';
 
 const App = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -65,7 +65,9 @@ const App = () => {
     { name: 'Spring Boot', icon: Code},
     { name: 'Postgres', icon: Database },
     { name: 'REST', icon: Plug },
-    { name: 'gRPC', icon: Plug }
+    { name: 'gRPC', icon: Plug },
+    { name: 'Docker', icon: Server },
+    { name: 'AWS', icon: Cloud }
   ];
 
   const projects = [
