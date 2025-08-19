@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ExternalLink, Code, Database, ChevronDown, Twitter, Plug, Cloud, Server } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, Code, Database, ChevronDown, Twitter, Plug, Cloud, Server, Tool } from 'lucide-react';
 
 const App = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -67,7 +67,8 @@ const App = () => {
     { name: 'REST', icon: Plug },
     { name: 'gRPC', icon: Plug },
     { name: 'Docker', icon: Server },
-    { name: 'AWS', icon: Cloud }
+    { name: 'AWS', icon: Cloud },
+    { name: 'Pytest', icon: Tool }
   ];
 
   const projects = [
@@ -75,7 +76,7 @@ const App = () => {
       title: 'Mobile Wallet Backend Service',
       description: 'A backend service for a mobile wallet',
       image: '',
-      tech: ['Flask', 'Kafka', 'Postgres', 'Stripe API', 'Daraja API', 'Micro-services'],
+      tech: ['Flask', 'Postgres', 'Stripe API', 'Daraja API'],
       github: 'https://github.com/devharnold/earwall',
       //live: 'https://your-ecommerce-demo.com',
     },
@@ -83,7 +84,7 @@ const App = () => {
       title: 'Farm-Client App',
       description: 'Redefines how food is being distributed after being produced by the local farmer',
       image: '',
-      tech: ['FastAPI', 'Postgres'],
+      tech: ['FastAPI', 'Postgres', 'AWS Boto3', 'Docker'],
       github: 'https://github.com/devharnold/farm-client',
       //live: 'https://your-taskmanager-demo.com',
     },
@@ -91,13 +92,13 @@ const App = () => {
       title: 'Event Management Application',
       description: 'About managing events, provides ticketing services and also payments',
       image: '',
-      tech: ['Spring Boot', 'Postgres'],
+      tech: ['Spring Boot', 'Postgres', 'Daraja API', ],
       github: 'https://github.com/devharnold/Eventshub',
       //live: 'https://your-taskmanager-demo.com',
     },
     {
       title: 'Leetcode Playground',
-      description: 'My DSA practising playground. I fight DSA wars here',
+      description: 'My DSA Leetcode Playground. I fight DSA wars here',
       tech: ['Python', 'Java', 'SQL'],
       github: 'https://github.com/devharnold/dsa-repo',
       live: 'https://leetcode.com/u/devharnold/'
@@ -295,7 +296,7 @@ const App = () => {
               <a href="https://linkedin.com/in/arnold-henry-ah01/" className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110">
                 <Linkedin size={24} />
               </a>
-              <a href="https://x.com/yourapinerd" className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110">
+              <a href="https://x.com/okaynerdie" className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110">
                 <Twitter size={24} />
               </a>
               <a href="https://leetcode.com/u/devharnold/" className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110">
