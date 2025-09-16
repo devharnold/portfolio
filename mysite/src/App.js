@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ExternalLink, Code, Database, ChevronDown, Twitter, Plug, Cloud, Server, Tool } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, Code, Database, ChevronDown, Twitter, Plug, Cloud, Server} from 'lucide-react';
 
 const App = () => {
   const [activeSection, setActiveSection] = useState('home');
