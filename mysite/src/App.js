@@ -68,7 +68,7 @@ const App = () => {
     { name: 'gRPC', icon: Plug },
     { name: 'Docker', icon: Server },
     { name: 'AWS', icon: Cloud },
-    { name: 'Pytest', icon: Tool }
+    { name: 'Pytest' }
   ];
 
   const projects = [
