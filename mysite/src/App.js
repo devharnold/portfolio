@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ExternalLink, Code, Database, ChevronDown, Twitter, Plug, Cloud, Server} from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, Code, Database, ChevronDown, Twitter, Plug, Cloud, Server } from 'lucide-react';
 
 const App = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -57,18 +57,43 @@ const App = () => {
   }, [words, currentWordIndex]);
 
   const skills = [
-    { name: 'Data Structures & Algorithms', icon: Code },
-    { name: 'Python', icon: Code },
-    { name: 'Go', icon: Code},
-    { name: 'FastAPI', icon: Code },
-    { name: 'Flask', icon: Code },
-    { name: 'Gin', icon: Code},
-    { name: 'Postgres', icon: Database },
-    { name: 'REST', icon: Plug },
-    { name: 'gRPC', icon: Plug },
-    { name: 'Docker', icon: Server },
-    { name: 'AWS', icon: Cloud },
-    { name: 'Pytest' }
+    {
+      category: "Backend",
+      items: [
+        { name: "Python", icon: Code },
+        { name: "Flask", icon: Code },
+        { name: "FastAPI", icon: Code },
+        { name: "Go", icon: Code },
+        { name: "Gin", icon: Code },
+      ],
+    },
+    {
+      category: "Database",
+      items: [
+        { name: "Postgres", icon: Database },
+      ],
+    },
+    {
+      category: "APIs",
+      items: [
+        { name: "REST", icon: Plug },
+        { name: "gRPC", icon: Plug },
+      ],
+    },
+    {
+      category: "DevOps & Cloud",
+      items: [
+        { name: "Docker", icon: Server },
+        { name: "Terraform", icon: Cloud },
+        { name: "AWS", icon: Cloud },
+      ],
+    },
+    {
+      category: "Testing",
+      items: [
+        { name: "Pytest", icon: Code },
+      ],
+    },
   ];
 
   const projects = [
@@ -78,7 +103,6 @@ const App = () => {
       image: '',
       tech: ['Flask', 'Postgres', 'Stripe API', 'Daraja API'],
       github: 'https://github.com/devharnold/earwall',
-      //live: 'https://your-ecommerce-demo.com',
     },
     {
       title: 'Farm-Client App',
@@ -86,15 +110,13 @@ const App = () => {
       image: '',
       tech: ['FastAPI', 'Postgres', 'AWS Boto3', 'Docker'],
       github: 'https://github.com/devharnold/farm-client',
-      //live: 'https://your-taskmanager-demo.com',
     },
     {
       title: 'Event Management Application',
       description: 'About managing events, provides ticketing services and also payments',
       image: '',
-      tech: ['Spring Boot', 'Postgres', 'Daraja API', ],
+      tech: ['Spring Boot', 'Postgres', 'Daraja API'],
       github: 'https://github.com/devharnold/Eventshub',
-      //live: 'https://your-taskmanager-demo.com',
     },
     {
       title: 'Leetcode Playground',
@@ -211,17 +233,19 @@ const App = () => {
             Skills & Technologies
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {skills.map((skill, index) => {
-              const Icon = skill.icon;
-              return (
-                <div key={skill.name} className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:border-purple-400/50 transition-all duration-300 hover:scale-105">
-                  <div className="flex items-center mb-4">
-                    <Icon className="text-purple-400 mr-3" size={24} />
-                    <h3 className="text-xl font-semibold">{skill.name}</h3>
-                  </div>
-                </div>
-              );
-            })}
+            {skills.map((group, idx) => (
+              <div key={idx} className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:border-purple-400/50 transition-all duration-300 hover:scale-105">
+                <h3 className="text-xl font-semibold mb-4">{group.category}</h3>
+                <ul className="space-y-3">
+                  {group.items.map((skill, i) => (
+                    <li key={i} className="flex items-center space-x-3 text-gray-300">
+                      <skill.icon className="w-5 h-5 text-purple-400" />
+                      <span>{skill.name}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </section>
