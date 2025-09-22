@@ -1,94 +1,142 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ExternalLink, Code, Database, ChevronDown, Twitter, Plug, Cloud, Server } from 'lucide-react';
+import {
+  Github,
+  Linkedin,
+  Mail,
+  ExternalLink,
+  Code,
+  Database,
+  ChevronDown,
+  Twitter,
+  Plug,
+  Cloud,
+  Server,
+} from 'lucide-react';
 
 const App = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [isVisible, setIsVisible] = useState({});
   const [typedText, setTypedText] = useState('');
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  
-  const words = React.useMemo(() => ['A Backend Developer', 'An API Nerd', 'A Problem Solver'], []);
-  
+
+  const words = React.useMemo(
+    () => ['A Backend Developer', 'An API Nerd', 'A Problem Solver'],
+    []
+  );
+
+  // IntersectionObserver for revealing sections and updating nav active state
   useEffect(() => {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      // fallback: mark home visible
+      setIsVisible({ home: true });
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          setIsVisible(prev => ({
+          setIsVisible((prev) => ({
             ...prev,
-            [entry.target.id]: entry.isIntersecting
+            [entry.target.id]: entry.isIntersecting,
           }));
+
+          if (entry.isIntersecting) {
+            // set activeSection to the visible one
+            setActiveSection(entry.target.id);
+          }
         });
       },
       { threshold: 0.1 }
     );
 
-    document.querySelectorAll('section[id]').forEach((section) => {
-      observer.observe(section);
-    });
+    const sections = document.querySelectorAll('section[id]');
+    sections.forEach((section) => observer.observe(section));
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
+  // Typing effect (type + pause + delete)
   useEffect(() => {
-    const currentWord = words[currentWordIndex];
+    let mounted = true;
     let charIndex = 0;
-    
-    const typeInterval = setInterval(() => {
-      if (charIndex <= currentWord.length) {
-        setTypedText(currentWord.slice(0, charIndex));
-        charIndex++;
-      } else {
-        setTimeout(() => {
-          const deleteInterval = setInterval(() => {
-            if (charIndex > 0) {
-              setTypedText(currentWord.slice(0, charIndex));
-              charIndex--;
-            } else {
-              clearInterval(deleteInterval);
-              setCurrentWordIndex((prev) => (prev + 1) % words.length);
-            }
-          }, 50);
-        }, 2000);
-        clearInterval(typeInterval);
-      }
-    }, 100);
+    let typeInterval = null;
+    let deleteInterval = null;
+    let pauseTimeout = null;
 
-    return () => clearInterval(typeInterval);
-  }, [words, currentWordIndex]);
+    const startTyping = () => {
+      const currentWord = words[currentWordIndex];
+      charIndex = 0;
+
+      typeInterval = setInterval(() => {
+        if (!mounted) return;
+        if (charIndex <= currentWord.length) {
+          setTypedText(currentWord.slice(0, charIndex));
+          charIndex++;
+        } else {
+          // finished typing -> pause then delete
+          clearInterval(typeInterval);
+          pauseTimeout = setTimeout(() => {
+            deleteInterval = setInterval(() => {
+              if (!mounted) return;
+              if (charIndex > 0) {
+                charIndex--;
+                setTypedText(currentWord.slice(0, charIndex));
+              } else {
+                clearInterval(deleteInterval);
+                // next word (this will re-run this effect)
+                setCurrentWordIndex((prev) => (prev + 1) % words.length);
+              }
+            }, 50);
+          }, 2000);
+        }
+      }, 100);
+    };
+
+    startTyping();
+
+    return () => {
+      mounted = false;
+      if (typeInterval) clearInterval(typeInterval);
+      if (deleteInterval) clearInterval(deleteInterval);
+      if (pauseTimeout) clearTimeout(pauseTimeout);
+    };
+  }, [currentWordIndex, words]);
 
   const skills = [
     {
-      category: "Backend",
+      category: 'Backend',
       items: [
-        { name: "Python", icon: Code },
-        { name: "Flask", icon: Code },
-        { name: "FastAPI", icon: Code },
-        { name: "Go", icon: Code },
-        { name: "Gin", icon: Code },
+        { name: 'Python', icon: Code },
+        { name: 'Flask', icon: Code },
+        { name: 'FastAPI', icon: Code },
+        { name: 'Go', icon: Code },
+        { name: 'Gin', icon: Code },
       ],
     },
     {
-      category: "Database",
-      items: [{ name: "Postgres", icon: Database }],
+      category: 'Database',
+      items: [{ name: 'Postgres', icon: Database }],
     },
     {
-      category: "APIs",
+      category: 'APIs',
       items: [
-        { name: "REST", icon: Plug },
-        { name: "gRPC", icon: Plug },
+        { name: 'REST', icon: Plug },
+        { name: 'gRPC', icon: Plug },
       ],
     },
     {
-      category: "DevOps & Cloud",
+      category: 'DevOps & Cloud',
       items: [
-        { name: "Docker", icon: Server },
-        { name: "Terraform", icon: Cloud },
-        { name: "AWS", icon: Cloud },
+        { name: 'Docker', icon: Server },
+        { name: 'Terraform', icon: Cloud },
+        { name: 'AWS', icon: Cloud },
       ],
     },
     {
-      category: "Testing",
-      items: [{ name: "Pytest", icon: Code }],
+      category: 'Testing',
+      items: [{ name: 'Pytest', icon: Code }],
     },
   ];
 
@@ -96,20 +144,22 @@ const App = () => {
     {
       title: 'Mobile Wallet Backend Service',
       description: 'A backend service for a mobile wallet',
-      image: '',
+      image: '', // empty -> will show placeholder
       tech: ['Flask', 'Postgres', 'Stripe API', 'Daraja API'],
       github: 'https://github.com/devharnold/earwall',
     },
     {
       title: 'Farm-Client App',
-      description: 'Redefines how food is being distributed after being produced by the local farmer',
+      description:
+        'Redefines how food is being distributed after being produced by the local farmer',
       image: '',
       tech: ['FastAPI', 'Postgres', 'AWS Boto3', 'Docker'],
       github: 'https://github.com/devharnold/farm-client',
     },
     {
       title: 'Event Management Application',
-      description: 'About managing events, provides ticketing services and also payments',
+      description:
+        'About managing events, provides ticketing services and also payments',
       image: '',
       tech: ['Spring Boot', 'Postgres', 'Daraja API'],
       github: 'https://github.com/devharnold/Eventshub',
@@ -119,8 +169,8 @@ const App = () => {
       description: 'My DSA Leetcode Playground. I fight DSA wars here',
       tech: ['Python', 'Java', 'SQL'],
       github: 'https://github.com/devharnold/dsa-repo',
-      live: 'https://leetcode.com/u/devharnold/'
-    }
+      live: 'https://leetcode.com/u/devharnold/',
+    },
   ];
 
   const scrollToSection = (sectionId) => {
@@ -134,13 +184,12 @@ const App = () => {
       <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-lg border-b border-white/10">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold text-white">
-              &lt;Henry Arnold /&gt;
-            </div>
+            <div className="text-2xl font-bold text-white">&lt;Henry Arnold /&gt;</div>
             <div className="hidden md:flex space-x-8">
               {['home', 'about', 'skills', 'projects', 'contact'].map((item) => (
                 <button
                   key={item}
+                  type="button"
                   onClick={() => scrollToSection(item)}
                   className={`capitalize transition-all duration-300 hover:text-white ${
                     activeSection === item ? 'text-white' : 'text-gray-400'
@@ -158,9 +207,8 @@ const App = () => {
       <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
         <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
           <div className="mb-8">
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 text-white animate-fade-in">
-              Welcome Aboard!
-            </h1>
+            <h1 className="text-6xl md:text-8xl font-bold mb-6 text-white">Welcome Aboard!</h1>
+
             <div className="text-2xl md:text-3xl text-gray-300 h-12 flex items-center justify-center">
               <span className="mr-2">I'm </span>
               <span className="text-white font-semibold min-w-[300px] text-left">
@@ -169,17 +217,22 @@ const App = () => {
               </span>
             </div>
           </div>
+
           <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Passionate about creating seamless digital experiences through code.  
+            Passionate about creating seamless digital experiences through code.
           </p>
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
+            <button
+              type="button"
               onClick={() => scrollToSection('projects')}
               className="px-8 py-4 bg-white text-black rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:bg-gray-200"
             >
               View My Work
             </button>
-            <button 
+
+            <button
+              type="button"
               onClick={() => scrollToSection('contact')}
               className="px-8 py-4 border-2 border-white rounded-full font-semibold transition-all duration-300 hover:bg-white hover:text-black"
             >
@@ -187,33 +240,35 @@ const App = () => {
             </button>
           </div>
         </div>
+
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
           <ChevronDown size={32} className="text-white" />
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className={`py-20 transition-all duration-1000 ${isVisible.about ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+      <section
+        id="about"
+        className={`py-20 transition-all duration-1000 ${
+          isVisible.about ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-white">
-            About Me
-          </h2>
+          <h2 className="text-4xl font-bold text-center mb-16 text-white">About Me</h2>
+
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <p className="text-lg text-gray-300 leading-relaxed">
-                As a Backend Software Engineer, I am passionate about creating clean, secure APIs.
-                With knowledge in <b>Backend Development</b>, I aim to solve problems through innovative solutions.
-                I am currently focused on micro-services, security, and performance optimization.
+                As a Backend Software Engineer, I am passionate about creating clean, secure APIs. With knowledge in{' '}
+                <b>Backend Development</b>, I aim to solve problems through innovative solutions. I am currently focused on
+                micro-services, security, and performance optimization.
               </p>
             </div>
+
             <div className="relative">
               <div className="w-80 h-80 mx-auto rounded-full border border-white p-1">
                 <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center overflow-hidden">
-                  <img
-                    src="/pics/arnold.JPG"
-                    alt="My Profile"
-                    className="w-full h-full object-cover rounded-full"
-                  />
+                  <img src="/pics/arnold.JPG" alt="My Profile" className="w-full h-full object-cover rounded-full" />
                 </div>
               </div>
             </div>
@@ -222,22 +277,32 @@ const App = () => {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className={`py-20 transition-all duration-1000 ${isVisible.skills ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+      <section
+        id="skills"
+        className={`py-20 transition-all duration-1000 ${
+          isVisible.skills ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-white">
-            Skills & Technologies
-          </h2>
+          <h2 className="text-4xl font-bold text-center mb-16 text-white">Skills & Technologies</h2>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {skills.map((group, idx) => (
-              <div key={idx} className="bg-gray-900 rounded-xl p-6 border border-white/10 hover:border-white transition-all duration-300 hover:scale-105">
+              <div
+                key={idx}
+                className="bg-gray-900 rounded-xl p-6 border border-white/10 hover:border-white transition-all duration-300 hover:scale-105"
+              >
                 <h3 className="text-xl font-semibold mb-4">{group.category}</h3>
                 <ul className="space-y-3">
-                  {group.items.map((skill, i) => (
-                    <li key={i} className="flex items-center space-x-3 text-gray-300">
-                      <skill.icon className="w-5 h-5 text-gray-400" />
-                      <span>{skill.name}</span>
-                    </li>
-                  ))}
+                  {group.items.map((skill, i) => {
+                    const Icon = skill.icon || Code;
+                    return (
+                      <li key={i} className="flex items-center space-x-3 text-gray-300">
+                        <Icon className="w-5 h-5 text-gray-400" />
+                        <span>{skill.name}</span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}
@@ -246,40 +311,70 @@ const App = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className={`py-20 transition-all duration-1000 ${isVisible.projects ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+      <section
+        id="projects"
+        className={`py-20 transition-all duration-1000 ${
+          isVisible.projects ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-white">
-            Projects
-          </h2>
+          <h2 className="text-4xl font-bold text-center mb-16 text-white">Projects</h2>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <div key={index} className="bg-gray-900 rounded-xl overflow-hidden border border-white/10 hover:border-white transition-all duration-300 hover:scale-105 group">
+              <div
+                key={index}
+                className="bg-gray-900 rounded-xl overflow-hidden border border-white/10 hover:border-white transition-all duration-300 hover:scale-105 group"
+              >
                 <div className="relative overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                  ) : (
+                    <div className="w-full h-48 bg-gray-800 flex items-center justify-center text-gray-400 text-sm">
+                      {project.title}
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
                 </div>
+
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-3">{project.title}</h3>
                   <p className="text-gray-400 mb-4 text-sm leading-relaxed">{project.description}</p>
+
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tech.map((tech, techIndex) => (
-                      <span key={techIndex} className="px-3 py-1 border border-white/20 text-gray-300 rounded-full text-xs">
+                      <span
+                        key={techIndex}
+                        className="px-3 py-1 border border-white/20 text-gray-300 rounded-full text-xs"
+                      >
                         {tech}
                       </span>
                     ))}
                   </div>
+
                   <div className="flex items-center justify-between">
-                    <div></div>
+                    <div />
                     <div className="flex space-x-2">
-                      <a href={project.github} className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
+                      >
                         <Github size={16} />
                       </a>
+
                       {project.live && (
-                        <a href={project.live} className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
+                        <a
+                          href={project.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
+                        >
                           <ExternalLink size={16} />
                         </a>
                       )}
@@ -293,33 +388,61 @@ const App = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className={`py-20 transition-all duration-1000 ${isVisible.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+      <section
+        id="contact"
+        className={`py-20 transition-all duration-1000 ${
+          isVisible.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-8 text-white">
-            Find me Here:
-          </h2>
+          <h2 className="text-4xl font-bold mb-8 text-white">Find me Here:</h2>
           <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
             Have a project going on? Let's create something amazing together.
           </p>
+
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <a 
+            <a
               href="mailto:henryarnoldme@gmail.com"
               className="flex items-center px-8 py-4 bg-white text-black rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:bg-gray-200"
             >
               <Mail className="mr-2" size={20} />
               Send Email
             </a>
+
             <div className="flex space-x-4">
-              <a href="https://github.com/devharnold" className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110">
+              <a
+                href="https://github.com/devharnold"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110"
+              >
                 <Github size={24} />
               </a>
-              <a href="https://linkedin.com/in/arnold-henry-ah01/" className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110">
+
+              <a
+                href="https://linkedin.com/in/arnold-henry-ah01/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110"
+              >
                 <Linkedin size={24} />
               </a>
-              <a href="https://x.com/okaynerdie" className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110">
+
+              <a
+                href="https://x.com/okaynerdie"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110"
+              >
                 <Twitter size={24} />
               </a>
-              <a href="https://leetcode.com/u/devharnold/" className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110">
+
+              <a
+                href="https://leetcode.com/u/devharnold/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-4 bg-white/10 rounded-full hover:bg-white/20 transition-colors hover:scale-110"
+              >
                 <Code size={24} />
               </a>
             </div>
@@ -330,9 +453,7 @@ const App = () => {
       {/* Footer */}
       <footer className="py-8 border-t border-white/10">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <p className="text-gray-400">
-            © 2025 Henry Arnold. Bye!!!
-          </p>
+          <p className="text-gray-400">© 2025 Henry Arnold. Bye!!!</p>
         </div>
       </footer>
     </div>
