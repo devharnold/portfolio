@@ -98,13 +98,6 @@ const App = () => {
 
   const projects = [
     {
-      title: 'Mobile Wallet Backend Service',
-      description: 'A backend service for a mobile wallet',
-      image: '',
-      tech: ['Flask', 'Postgres', 'Stripe API', 'Daraja API'],
-      github: 'https://github.com/devharnold/earwall',
-    },
-    {
       title: 'Farm-Client App',
       description: 'Redefines how food is being distributed after being produced by the local farmer',
       image: '',
@@ -124,6 +117,12 @@ const App = () => {
       tech: ['Python', 'Java', 'SQL'],
       github: 'https://github.com/devharnold/dsa-repo',
       live: 'https://leetcode.com/u/devharnold/'
+    },
+    {
+      title: 'Notes API Service',
+      description: 'A simple project that illustrates CRUD with the AWS S3 Bucket',
+      tech: ['Go', 'Gin', 'Docker', 'S3'],
+      github: 'https://github.com/devharnold/smart-notes-api'
     }
   ];
 
@@ -170,7 +169,7 @@ const App = () => {
               <span className="mr-2">I'm </span>
               <span className="text-purple-400 font-semibold min-w-[300px] text-left">
                 {typedText}
-                <span className="animate-pulse">%</span>
+                <span className="animate-pulse">|</span>
               </span>
             </div>
           </div>
@@ -208,7 +207,7 @@ const App = () => {
               <p className="text-lg text-gray-300 leading-relaxed">
                 As a Backend Software Engineer, I have been passionate and drawn to creating new solutions and on a mission to write clean, secure APIs.
                 With knowledge in <b>Backend Development</b> I am open to working towards solving problems through innovative solutions.
-                I am currently building solutions with keen interest on micro-services, security and performance optimization.
+                I am currently building solutions with keen interest in cloud, micro-services, security and performance optimization.
               </p>
             </div>
             <div className="relative">
