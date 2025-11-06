@@ -65,6 +65,8 @@ const App = () => {
         { name: "FastAPI", icon: Code },
         { name: "Go", icon: Code },
         { name: "Gin", icon: Code },
+        { name: "Java", icon: Code },
+        { name: "SpringBoot", icon: Code }
       ],
     },
     {
